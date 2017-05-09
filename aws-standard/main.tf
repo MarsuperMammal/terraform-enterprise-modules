@@ -272,7 +272,7 @@ module "db" {
   password                = "${var.db_password}"
   storage_gbs             = "${var.db_size_gb}"
   subnet_ids              = "${var.data_subnet_ids}"
-  rds_security_groups     = "${var.rds_security_group}"
+  rds_security_group      = "${var.rds_security_group}"
   version                 = "9.4.7"
   vpc_cidr                = "0.0.0.0/0"
   vpc_id                  = "${data.aws_subnet.instance.vpc_id}"
@@ -287,7 +287,7 @@ module "redis" {
   source                = "../modules/redis"
   name                  = "tfe-${random_id.installation-id.hex}"
   subnet_ids            = "${var.data_subnet_ids}"
-  redis_security_groups = "${var.redis_security_group}"
+  redis_security_group  = "${var.redis_security_group}"
 
   vpc_cidr              = "0.0.0.0/0"
   vpc_id                = "${data.aws_subnet.instance.vpc_id}"
