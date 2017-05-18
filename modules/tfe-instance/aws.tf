@@ -170,8 +170,6 @@ aws s3 cp s3://${aws_s3_bucket_object.setup.bucket}/${aws_s3_bucket_object.setup
 
 ${var.startup_script}
   BASH
-
-  depends_on = ["aws_s3_bucket_object.setup"]
 }
 
 resource "aws_autoscaling_group" "ptfe" {
