@@ -208,8 +208,8 @@ resource "aws_kms_key" "key" {
       "Principal": {
         "AWS": [
           "${data.aws_caller_identity.current.arn}",
-          "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root",
-          "${coalesce(var.instance_role_arn ,join(",", "arn:aws:iam::", data.aws_caller_identity.current.account_id, ":role/tfe_iam_role-", random_id.installation-id.hex))}"
+          "arn:${var.arn_partition}:iam::${data.aws_caller_identity.current.account_id}:root",
+          "${coalesce(var.instance_role_arn ,"arn:${var.arn_partition}:iam::${data.aws_caller_identity.current.account_id}:role/tfe_iam_role-${random_id.installation-id.hex}")}"
         ]
       },
       "Action": "kms:*",
