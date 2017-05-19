@@ -123,11 +123,7 @@ as SMTP and NTP are not proxied and will attempt to connect directly.
 * `hostname`: If specifying `zone_id`, this should be set to the name that is used for the record to be registered with the zone. This value combined with the zone information will form the full DNS name for TFE. Example: `emp-test`
 * `instance_role_arn`: Specify the ARN for the instance's IAM role rather than having one created.
 * `instance_profile_arn`: Specify the ARN for the instance's IAM profile rather than having one created.
-* `rds_security_group`: Specify a Security Group for RDS rather than having one created.
-* `redis_security_group`: Specify a Security Group for Redis rather than having one created.
-* `internal_security_group`: Specify a Security Group for internal communications rather than having one created.
-* `external_security_group`: Specify a Security Group for external communications rather than having one created.
->>>>>>> added optional variable entries for BYO SG and IAM
+* `resource_tags`: Tags that should be added to any resource that support tagging.
 
 ### Populating Variables
 
