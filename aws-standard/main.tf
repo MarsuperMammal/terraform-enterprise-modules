@@ -74,16 +74,6 @@ variable "instance_profile_arn" {
   default     = ""
 }
 
-variable "internal_security_group" {
-  description = "An existing Security Group for internal communication"
-  default     = ""
-}
-
-variable "external_security_group" {
-  description = "An existing Security Group for external communication"
-  default     = ""
-}
-
 variable "resource_tags" {
   type        = "map"
   description = "Tags that should be added to any resource that support tagging"
@@ -122,16 +112,6 @@ variable "db_multi_az" {
 
 variable "db_snapshot_identifier" {
   description = "Snapshot of database to use upon creation of RDS"
-  default     = ""
-}
-
-variable "rds_security_group" {
-  description = "An existing Security Group for RDS communication"
-  default     = ""
-}
-
-variable "redis_security_group" {
-  description = "An existing Security Group for redis communication"
   default     = ""
 }
 
@@ -238,7 +218,6 @@ module "route53" {
 }
 
 module "instance" {
-<<<<<<< HEAD
   source                     = "../modules/tfe-instance"
   installation_id            = "${random_id.installation-id.hex}"
   ami_id                     = "${var.ami_id}"
@@ -255,7 +234,7 @@ module "instance" {
   db_database                = "${module.db.database}"
   redis_host                 = "${module.redis.host}"
   redis_port                 = "${module.redis.port}"
-  resource_tags           = "${var.resource_tags}"
+  resource_tags              = "${var.resource_tags}"
   bucket_name                = "${var.bucket_name}"
   bucket_region              = "${var.region}"
   kms_key_id                 = "${coalesce(var.kms_key_id, join("", aws_kms_key.key.*.arn))}"
@@ -278,7 +257,7 @@ module "db" {
   password                = "${var.db_password}"
   storage_gbs             = "${var.db_size_gb}"
   subnet_ids              = "${var.data_subnet_ids}"
-  rds_security_group      = "${var.rds_security_group}"
+  rds_security_group      = "${var.internal_security_group_id}"
   resource_tags           = "${var.resource_tags}"
   version                 = "9.4.7"
   vpc_cidr                = "0.0.0.0/0"
@@ -294,7 +273,7 @@ module "redis" {
   source                = "../modules/redis"
   name                  = "tfe-${random_id.installation-id.hex}"
   subnet_ids            = "${var.data_subnet_ids}"
-  redis_security_group  = "${var.redis_security_group}"
+  redis_security_group  = "${var.internal_security_group_id}"
   resource_tags         = "${var.resource_tags}"
   vpc_cidr              = "0.0.0.0/0"
   vpc_id                = "${data.aws_subnet.instance.vpc_id}"
