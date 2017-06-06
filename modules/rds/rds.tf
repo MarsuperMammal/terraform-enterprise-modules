@@ -51,7 +51,7 @@ resource "aws_db_subnet_group" "rds" {
 }
 
 resource "aws_security_group" "rds" {
-  count = "${var.rds_security_group != "" ? 0 : 1}"
+  count = 0
   name   = "${var.name}"
   vpc_id = "${var.vpc_id}"
 
