@@ -18,8 +18,6 @@ variable "ami_id" {}
 
 variable "instance_type" {}
 
-variable "instance_iam_role" {}
-
 variable "instance_role_arn" {}
 
 variable "instance_profile_arn" {}
