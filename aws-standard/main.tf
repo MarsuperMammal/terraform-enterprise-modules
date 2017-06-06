@@ -226,6 +226,8 @@ module "instance" {
   vpc_id                     = "${data.aws_subnet.instance.vpc_id}"
   cert_id                    = "${var.cert_id}"
   instance_subnet_id         = "${var.instance_subnet_id}"
+  instance_profile_arn       = "${var.instance_profile_arn}"
+  instance_role_arn          = "${var.instance_role_arn}"
   elb_subnet_id              = "${var.elb_subnet_id}"
   key_name                   = "${var.key_name}"
   db_username                = "${var.db_username}"
