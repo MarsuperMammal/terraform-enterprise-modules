@@ -249,8 +249,8 @@ PROXY_URL="${var.proxy_url}"
 resource "aws_elb" "ptfe" {
   internal        = "${var.internal_elb}"
   subnets         = ["${var.elb_subnet_id}"]
-  security_groups = ["${coalesce(var.external_security_group_id, aws_security_group.ptfe-external.id)}"]
-
+  // security_groups = ["${coalesce(var.external_security_group_id, aws_security_group.ptfe-external.id)}"]
+  security_groups = ["${var.external_security_group_id}"]
   listener {
     instance_port      = 8080
     instance_protocol  = "http"
