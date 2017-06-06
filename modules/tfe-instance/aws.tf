@@ -69,8 +69,6 @@ variable "proxy_url" {
 }
 
 resource "aws_security_group" "ptfe" {
-  count = "${var.internal_security_group != "" ? 0 : 1}"
-
   vpc_id = "${var.vpc_id}"
   count  = "${var.internal_security_group_id != "" ? 0 : 1}"
 
@@ -108,7 +106,7 @@ resource "aws_security_group" "ptfe" {
 }
 
 resource "aws_security_group" "ptfe-external" {
-  count = "${var.external_security_group != "" ? 0 : 1}"
+  count = "${var.external_security_group_id != "" ? 0 : 1}"
   vpc_id = "${var.vpc_id}"
 
   ingress {
@@ -148,8 +146,8 @@ resource "aws_launch_configuration" "ptfe" {
   image_id             = "${var.ami_id}"
   instance_type        = "${var.instance_type}"
   key_name             = "${var.key_name}"
-  security_groups      = ["${var.internal_security_group}"]
-//  security_groups      = ["${coalesce(var.internal_security_group, aws_security_group.ptfe.id)}"]
+  security_groups      = ["${var.internal_security_group_id}"]
+//  security_groups      = ["${coalesce(var.internal_security_group_id, aws_security_group.ptfe.id)}"]
   iam_instance_profile = "${var.instance_profile_arn}"
 //  iam_instance_profile = "${aws_iam_instance_profile.tfe_instance.name}"
 
