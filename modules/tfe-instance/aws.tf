@@ -70,7 +70,7 @@ variable "proxy_url" {
 
 resource "aws_security_group" "ptfe" {
   vpc_id = "${var.vpc_id}"
-  count  = "${var.internal_security_group_id != "" ? 0 : 1}"
+  count  = 0
 
   ingress {
     from_port   = 22
@@ -106,7 +106,7 @@ resource "aws_security_group" "ptfe" {
 }
 
 resource "aws_security_group" "ptfe-external" {
-  count = "${var.external_security_group_id != "" ? 0 : 1}"
+  count = 0
   vpc_id = "${var.vpc_id}"
 
   ingress {
