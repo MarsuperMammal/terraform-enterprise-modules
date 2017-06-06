@@ -39,7 +39,7 @@ resource "aws_elasticache_parameter_group" "redis" {
 }
 
 resource "aws_security_group" "redis" {
-  count = "${var.redis_security_group != "" ? 0 : 1}"
+  count = 0
   vpc_id = "${var.vpc_id}"
 
   ingress {
